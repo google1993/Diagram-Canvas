@@ -10,22 +10,16 @@ function Resize() {
 window.addEventListener("load", Resize, false);
 window.addEventListener("resize", Resize, false);
 
-var t = new ProcessColumn(5, 5, 20, 400);
-t.BuildDefault();
-var pers = 0;
-var status = 1;
 but1.onclick = function () {
-    if (pers > 100) {
-        pers = 0;
-        status++;
-    }
-    else {
-        pers += 10;
-    }
-    t.status = status;
-    t.percent = pers;
-
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    t.Print(ctx);
+
+    for (var i = 0; i < 10; i++) {
+        for (var j = 0; j < 20; j++) {
+            var t = new BlinkStatus(5 + 35 * i, 5 + 20 * j, 30, 15);
+            t.BuildDefault();
+            t.status = Math.floor(Math.random() * 4);
+            t.Print(ctx);
+        }
+    }
 }

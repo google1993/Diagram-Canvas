@@ -75,7 +75,7 @@
 
     BuildDefault() {
         var defaultPoint = [57, 49, 49, 71, 28, 49, 21, 171, 114, 103];
-        var defaultColor = ["#0ff", "#00f", "#f00", "#0f0", "#0ff", "#00f", "#8500b6", "#f00", "#f0f", "#0f0",]
+        var defaultColor = ["#0ff", "#00f", "#f00", "#0f0", "#0ff", "#00f", "#8500b6", "#f00", "#f0f", "#0f0"]
         for (var i = 0; i < defaultPoint.length; i++)
             this.AddStatus(defaultColor[i], defaultPoint[i]);
     };
