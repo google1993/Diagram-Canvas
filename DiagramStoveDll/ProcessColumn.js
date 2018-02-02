@@ -44,6 +44,10 @@
         this._rAll.Change(nVal);
         this.ReBuild();
     }
+    Change(x, y, w, h) {
+        this._rAll.ChangeParam(x,y,w,h);
+        this.ReBuild();
+    }
     ReBuild() {
         var coorY = this._rAll.y + 1;
         for (var i = this._rStats.length - 1; i >= 0; i--) {

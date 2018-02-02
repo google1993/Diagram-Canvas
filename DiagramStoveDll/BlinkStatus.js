@@ -1,15 +1,27 @@
 ﻿class BlinkStatus {
     constructor(x, y, w, h) {
-        this._rMain = new Rectangle(x, y, w, h);
+        this._rAll = new Rectangle(x, y, w, h);
         this._statusColor = [];
         this._status = 0;
     }
 
-    get status() { return this._status; }
+    get allStats() {
+        return this._statusColor.length;
+    }
+    get status() {
+        return this._status;
+    }
+    get rect() {
+        return this._rAll;
+    }
+
     set status(nVal) {
         this._status = (isNaN(nVal) || parseInt(nVal) < 0) ? 0 :
             parseInt(nVal) > this._statusColor.length ? this._statusColor.length :
                 parseInt(nVal);
+    }
+    set rect(nVal) {
+        this._rAll.Change(nVal);
     }
 
     AddStatus(color) {
@@ -17,24 +29,21 @@
             color.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i)[0] : "#000000";
         this._statusColor.push(c);
     }
-
     DelStatus() {
         if (this._statusColor.length > 0)
             this._statusColor.pop();
+        this._status = 0;
     }
 
-    ChangeRect(nVal) {
-        this._rMain.Change(nVal);
+    Change(x, y, w, h) {
+        this._rAll.ChangeParam(x, y, w, h);
     }
 
     Print(ctx) {
-        if (this._status > 0)
-            ctx.fillStyle = this._statusColor[this._status - 1];
-        else
-            ctx.fillStyle = "#aaa";
-        ctx.fillRect(this._rMain.x, this._rMain.y, this._rMain.w, this._rMain.h);
+        ctx.fillStyle = this._status > 0 ? this._statusColor[this._status - 1] : "#aaa";
+        ctx.fillRect(this._rAll.x, this._rAll.y, this._rAll.w, this._rAll.h);
         ctx.strokeStyle = "#333";
-        ctx.strokeRect(this._rMain.x, this._rMain.y, this._rMain.w, this._rMain.h);
+        ctx.strokeRect(this._rAll.x, this._rAll.y, this._rAll.w, this._rAll.h);
     }
 
     BuildDefault() {

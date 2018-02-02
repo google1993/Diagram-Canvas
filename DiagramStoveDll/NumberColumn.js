@@ -1,30 +1,50 @@
 ﻿class NumberColumn {
     constructor(x, y, w, h, num) {
-        this._rMain = new Rectangle(x, y, w, h);
+        this._rAll = new Rectangle(x, y, w, h);
+        this._prostoy = 0;
         this.number = num;
-        this.prostoy = 0;
     }
 
-    get prostoy() { return this._prostoy; }
-    set prostoy(nVal) { this._prostoy = (isNaN(nVal) || parseInt(nVal) != 1) ? 0 : 1; }
-    get number() { return this._number; }
-    set number(nVal) { this._number = (isNaN(parseInt(nVal)) || parseInt(nVal) < 0) ? 0 : parseInt(nVal); }
-    
-    ChangeRect(nVal) {
-        this._rMain.Change(nVal);
+    get prostoy() {
+        return this._prostoy;
+    }
+    get number() {
+        return this._number;
+    }
+    get rect() {
+        return this._rAll;
+    }
+
+    set prostoy(nVal) {
+        this._prostoy = (isNaN(nVal) || parseInt(nVal) != 1) ? 0 : 1;
+    }
+    set number(nVal) {
+        this._number = (isNaN(parseInt(nVal)) || parseInt(nVal) < 0) ? 0 : parseInt(nVal);
+    }
+    set rect(nVal) {
+        this._rAll.Change(nVal);
+    }
+    Change(x, y, w, h) {
+        this._rAll.ChangeParam(x, y, w, h);
     }
 
     Print(ctx) {
-        ctx.fillStyle = this.prostoy == 0 ? "#ff0" : "#ff8000";
-        ctx.fillRect(this._rMain.x, this._rMain.y, this._rMain.w, this._rMain.h);
+        ctx.fillStyle = this._prostoy == 0 ? "#ff0" : "#ff8000";
+        ctx.fillRect(this._rAll.x, this._rAll.y, this._rAll.w, this._rAll.h);
         ctx.strokeStyle = "#333";
-        ctx.strokeRect(this._rMain.x, this._rMain.y, this._rMain.w, this._rMain.h);
-
+        ctx.strokeRect(this._rAll.x, this._rAll.y, this._rAll.w, this._rAll.h);
         ctx.fillStyle = "#000";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.font = "bold " + (this._rMain.h - 3 < 0 ? 0 : this._rMain.h - 3) + "px Arial";
-        ctx.fillText(this.number, this._rMain.x + this._rMain.w / 2, this._rMain.y + 1 + this._rMain.h / 2); 
+        //ctx.font = "bold " + (this._rAll.h - 3 < 0 ? 0 : this._rAll.h - 3) + "px Arial";
+        var px = 0
+        if (this._rAll.h < this._rAll.w )
+            px = this._rAll.h - 3 < 0 ? 0 : this._rAll.h - 3;
+        else
+            px = this._rAll.w - 3 < 0 ? 0 : this._rAll.w - 3;
+        ctx.font = px + "px Arial";
+
+        ctx.fillText(this._number, this._rAll.x + this._rAll.w / 2, this._rAll.y + 1 + this._rAll.h / 2); 
     }
 }
 
