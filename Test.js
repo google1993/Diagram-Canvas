@@ -5,6 +5,9 @@ var chkText = document.getElementById('PText');
 var chkData = document.getElementById('DefData');
 var chkloop = document.getElementById('ChkLoop');
 
+var legend1 = document.getElementById("legend1");
+var legend2 = document.getElementById("legend2");
+
 var but1 = document.getElementById('TestPercent'); 
 var but2 = document.getElementById('TestProcess'); 
 var but3 = document.getElementById('TestBlinkStatus');
@@ -19,29 +22,15 @@ function Resize() {
     canvas.width = window.innerWidth - 20;
     canvas.height = window.innerHeight - 70;
     ctx = canvas.getContext("2d");
+    canvas.height = window.innerHeight - legend1.offsetHeight - legend2.offsetHeight - buttons.offsetHeight - 60;
+    diagramStove.RectParam(0, 0, canvas.width, canvas.height);
+    diagramStove.Print(ctx);
+    if (chkText.checked) {
+        diagramStove.PrintText(ctx);
+    }
 }
 window.addEventListener("load", Resize, false);
 window.addEventListener("resize", Resize, false);
-
-function PrintRotateText(x, y, px, text) {
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.rotate(3 * Math.PI / 2);
-    ctx.fillStyle = "#888";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.font = px + "px Arial";
-    ctx.fillText(text, 0, 0);
-    ctx.restore();
-}
-function PrintText(x, y, px, text) {
-    ctx.fillStyle = "#888";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.font = px + "px Arial";
-    ctx.fillText(text, x, y);
-    ctx.restore();
-}
 
 but1.onclick = function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -151,53 +140,36 @@ but5.onclick = function () {
     }
 }
 
+
+var diagramStove = new Diagram(0, 0, canvas.width, canvas.height);
+diagramStove.BuildDefault();
+
 but6.onclick = function () {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'getinfo', true);
     xhr.send();
-
     xhr.onreadystatechange = function () {
         if (xhr.readyState != 4) return;
         if (xhr.status != 200) {
             alert(xhr.status + ': ' + xhr.statusText);
             return;
         }
-        PrintDiagram(xhr.responseText);
+        var Pech = JSON.parse(xhr.responseText);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < diagramStove.ProcessCount(); i++) {
+            diagramStove.ChangeStatProc(i + 1, Pech[i].pstatus, Pech[i].percent);
+            diagramStove.ChangeStatBlink(i + 1, Pech[i].bstatus);
+            diagramStove.ChangeStatNumb(i + 1, Pech[i].prostoy);
+        }
+        diagramStove.Print(ctx);
+        if (chkText.checked) {
+            diagramStove.PrintText(ctx);
+        }
         if (chkloop.checked) {
             setTimeout(but6.onclick, 60000);
             but6.disabled = true;
         } else {
             but6.disabled = false;
-        }
-    }
-}
-
-function PrintDiagram(pechstatus) {
-    var Pech = JSON.parse(pechstatus);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var t = new DiagramStove(0, 0, canvas.width, canvas.height);
-    t.BuildDefault();
-
-    for (var key in Pech) {
-        t._rProc[Pech[key].pech - 1].status = Pech[key].pstatus;
-        t._rBlink[Pech[key].pech - 1].status = Pech[key].bstatus;
-        t._rNumb[Pech[key].pech - 1].prostoy = Pech[key].prostoy;
-        t._rProc[Pech[key].pech - 1].percent = Pech[key].percent;
-    }
-    t.Print(ctx);
-    if (chkText.checked) {
-        for (var key in t._rProc) {
-            PrintRotateText(t._rProc[key].rect.x + t._rProc[key].rect.w / 2,
-                t._rProc[key].rect.y + t._rProc[key].rect.h / 2 + 1,
-                t._rProc[key].rect.w - 2 < 0 ? 0 :
-                    t._rProc[key].rect.w > 25 ? 25 :
-                        t._rProc[key].rect.w - 2,
-                t._rProc[key].percent + "% " +
-                t._rProc[key].status + "/" + t._rProc[key].allStats);
-            PrintText(t._rBlink[key].rect.x + t._rBlink[key].rect.w / 2,
-                t._rBlink[key].rect.y + t._rBlink[key].rect.h / 2 + 1,
-                t._rBlink[key].rect.h - 2 < 0 ? 0 : t._rBlink[key].rect.h - 2,
-                t._rBlink[key].status + "/" + t._rBlink[key].allStats);
         }
     }
 }
