@@ -1,50 +1,35 @@
-﻿class NumberColumn {
-    constructor(x, y, w, h, num) {
-        this._rAll = new Rectangle(x, y, w, h);
-        this._prostoy = 0;
-        this.number = num;
+﻿function NumberColumn(x, y, w, h, number) {
+    this.Number = function (nVal) {
+        if (nVal == undefined) return number;
+        number = (isNaN(parseInt(nVal)) || parseInt(nVal) < 0) ? 0 : parseInt(nVal);
     }
-
-    get prostoy() {
-        return this._prostoy;
+    this.Prostoy = function (nVal) {
+        if (nVal == undefined) return nVal;
+        prostoy = (isNaN(nVal) || parseInt(nVal) != 1) ? 0 : 1;
     }
-    get number() {
-        return this._number;
+    this.Rect = function (nVal) {
+        if (nVal == undefined) return rAll;
+        rAll.Rect(nVal);
     }
-    get rect() {
-        return this._rAll;
+    this.RectParam = function (x, y, w, h) {
+        rAll.RectParam(x, y, w, h);
     }
-
-    set prostoy(nVal) {
-        this._prostoy = (isNaN(nVal) || parseInt(nVal) != 1) ? 0 : 1;
-    }
-    set number(nVal) {
-        this._number = (isNaN(parseInt(nVal)) || parseInt(nVal) < 0) ? 0 : parseInt(nVal);
-    }
-    set rect(nVal) {
-        this._rAll.Change(nVal);
-    }
-    Change(x, y, w, h) {
-        this._rAll.ChangeParam(x, y, w, h);
-    }
-
-    Print(ctx) {
-        ctx.fillStyle = this._prostoy == 0 ? "#ff0" : "#ff8000";
-        ctx.fillRect(this._rAll.x, this._rAll.y, this._rAll.w, this._rAll.h);
+    this.Print = function (ctx) {
+        ctx.fillStyle = prostoy == 0 ? "#ff0" : "#ff8000";
+        ctx.fillRect(rAll.X(), rAll.Y(), rAll.W(), rAll.H());
         ctx.strokeStyle = "#333";
-        ctx.strokeRect(this._rAll.x, this._rAll.y, this._rAll.w, this._rAll.h);
+        ctx.strokeRect(rAll.X(), rAll.Y(), rAll.W(), rAll.H());
         ctx.fillStyle = "#000";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        //ctx.font = "bold " + (this._rAll.h - 3 < 0 ? 0 : this._rAll.h - 3) + "px Arial";
-        var px = 0
-        if (this._rAll.h < this._rAll.w )
-            px = this._rAll.h - 3 < 0 ? 0 : this._rAll.h - 3;
-        else
-            px = this._rAll.w - 3 < 0 ? 0 : this._rAll.w - 3;
+        var px = rAll.H() < rAll.W() ? rAll.H() - 3 : rAll.W() - 3;
+        px = px < 0 ? 0 : px;
         ctx.font = px + "px Arial";
-
-        ctx.fillText(this._number, this._rAll.x + this._rAll.w / 2, this._rAll.y + 1 + this._rAll.h / 2); 
+        ctx.fillText(number, rAll.X() + rAll.W() / 2, rAll.Y() + 1 + rAll.H() / 2);
     }
-}
 
+    var self = this;
+    var rAll = new Rectangle(x, y, w, h);
+    var prostoy = 0;
+    (number == undefined) ? number = 0 : self.Number(number);
+}

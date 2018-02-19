@@ -3,11 +3,16 @@ var ctx = canvas.getContext("2d");
 
 var chkText = document.getElementById('PText'); 
 var chkData = document.getElementById('DefData');
+var chkloop = document.getElementById('ChkLoop');
+
 var but1 = document.getElementById('TestPercent'); 
 var but2 = document.getElementById('TestProcess'); 
 var but3 = document.getElementById('TestBlinkStatus');
 var but4 = document.getElementById('TestNumberColumn')
 var but5 = document.getElementById('TestDiagramStove');
+
+var but6 = document.getElementById('TestPost');
+var text = document.getElementById('TestDiv');
 
 function Resize() {
     canvas.style.margin = "10px";
@@ -38,7 +43,6 @@ function PrintText(x, y, px, text) {
     ctx.restore();
 }
 
-
 but1.onclick = function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var y = 100;
@@ -51,21 +55,19 @@ but1.onclick = function () {
                 Math.floor(Math.random() * 101), chkData.checked ? "#222" : getRColor());
             t.Print(ctx);
             if (chkText.checked)
-                PrintRotateText(t.rect.x + t.rect.w / 2,
-                    t.rect.y + t.rect.h / 2,
-                    t.rect.w - 10 < 0 ? 0 : t.rect.w - 10,
-                    t.percent + "%");
+                t.PrintText(ctx);
         }
     }
 }
-
 but2.onclick = function () {
+    var y = 200;
+    var x = 30;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (var i = 0; (10 + 35 * (i + 1)) < canvas.width; i++) {
-        for (var j = 0; (10 + 205 * j + 100) < canvas.height; j++) {
+    for (var i = 0; (10 + (x + 5) * (i + 1)) < canvas.width; i++) {
+        for (var j = 0; (10 + (y + 5) * (j + 1)) < canvas.height; j++) {
             var t = new ProcessColumn(
-                5 + 35 * i, 5 + 205 * j,
-                30, ((10 + 205 * (j + 1)) <= canvas.height) ? 200 : canvas.height - 10 - 200 * j);
+                5 + (x + 5) * i, 5 + (y + 5) * j,
+                x, ((10 + (y + 5) * (j + 1)) <= canvas.height) ? y : canvas.height - x - y * j);
             if (chkData.checked)
                 t.BuildDefault();
             else
@@ -73,18 +75,14 @@ but2.onclick = function () {
                     t.AddRStat(getRColor(), Math.floor(Math.random() * 100));
                 }
 
-            t.status = Math.floor(Math.random() * 11 + 1);
-            t.percent = Math.floor(Math.random() * 101);
+            t.Status(Math.floor(Math.random() * 11 + 1));
+            t.Percent(Math.floor(Math.random() * 101));
             t.Print(ctx);
             if (chkText.checked)
-                PrintRotateText(t.rect.x + t.rect.w / 2,
-                    t.rect.y + t.rect.h / 2,
-                    t.rect.w - 10 < 0 ? 0 : t.rect.w - 10,
-                    t.percent + "% " + t.status + "/" + t.allStats);
+                t.PrintText(ctx);
         }
     }
 }
-
 but3.onclick = function () {
     var y = 15;
     var x = 30;
@@ -97,17 +95,13 @@ but3.onclick = function () {
             else
                 for (var k = 0; k < 3; k++)
                     t.AddStatus(getRColor());
-            t.status = Math.floor(Math.random() * 4);
+            t.Status(Math.floor(Math.random() * 4));
             t.Print(ctx);
             if (chkText.checked)
-                PrintText(t.rect.x + t.rect.w / 2,
-                    t.rect.y + t.rect.h / 2 + 1,
-                    t.rect.h - 2 < 0 ? 0 : t.rect.h - 2,
-                    t.status + "/" + t.allStats);
+                t.PrintText(ctx);
         }
     }
 }
-
 but4.onclick = function () {
     var y = 20;
     var x = 30;
@@ -115,7 +109,7 @@ but4.onclick = function () {
     for (var i = 0; (10 + (x + 5) * (i + 1)) < canvas.width; i++) {
         for (var j = 0; (10 + (y + 5) * (j + 1)) < canvas.height; j++) {
             var t = new NumberColumn(5 + (x + 5) * i, 5 + (y + 5) * j, x, y, Math.floor(Math.random() * 100));
-            t.prostoy = Math.floor(Math.random() * 2);
+            t.Prostoy(Math.floor(Math.random() * 2));
             t.Print(ctx);
         }
     }
@@ -123,14 +117,13 @@ but4.onclick = function () {
 
 but5.onclick = function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var t = new DiagramStove(0, 0, canvas.width, canvas.height);
+    var t = new Diagram(0, 0, canvas.width, canvas.height);
     if (chkData.checked) {
         t.BuildDefault();
-        for (var key in t._rProc) {
-            t._rProc[key].status = Math.floor(Math.random() * 11 + 1);
-            t._rProc[key].percent = Math.floor(Math.random() * 101);
-            t._rBlink[key].status = Math.floor(Math.random() * 4);
-            t._rNumb[key].prostoy = Math.floor(Math.random() * 2);
+        for (var i = 0; i < t.ProcessCount(); i++) {
+            t.ChangeStatProc(i, Math.floor(Math.random() * 11 + 1), Math.floor(Math.random() * 101));
+            t.ChangeStatBlink(i, Math.floor(Math.random() * 4));
+            t.ChangeStatNumb(i, Math.floor(Math.random() * 2));
         }
     }
     else {
@@ -140,18 +133,56 @@ but5.onclick = function () {
             for (var j = 0; j < Math.floor(Math.random() * 9 + 1); j++) {
                 tP.AddRStat(getRColor(), Math.floor(Math.random() * 100));
             }
-            tP.status = Math.floor(Math.random() * 11 + 1);
-            tP.percent = Math.floor(Math.random() * 101);
+            tP.Status(Math.floor(Math.random() * 11 + 1));
+            tP.Percent(Math.floor(Math.random() * 101));
 
             var tB = new BlinkStatus(0,0,0,0);
             for (var k = 0; k < 3; k++)
                 tB.AddStatus(getRColor());
-            tB.status = Math.floor(Math.random() * 4);
+            tB.Status(Math.floor(Math.random() * 4));
             var tN = new NumberColumn(0, 0, 0, 0, i + 1);
-            tN.prostoy = Math.floor(Math.random() * 2);
+            tN.Prostoy(Math.floor(Math.random() * 2));
             t.AddStove(tP, tB, tN);
         }
-        t.ReBuild();
+    }
+    t.Print(ctx);
+    if (chkText.checked) {
+        t.PrintText(ctx);
+    }
+}
+
+but6.onclick = function () {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'getinfo', true);
+    xhr.send();
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState != 4) return;
+        if (xhr.status != 200) {
+            alert(xhr.status + ': ' + xhr.statusText);
+            return;
+        }
+        PrintDiagram(xhr.responseText);
+        if (chkloop.checked) {
+            setTimeout(but6.onclick, 60000);
+            but6.disabled = true;
+        } else {
+            but6.disabled = false;
+        }
+    }
+}
+
+function PrintDiagram(pechstatus) {
+    var Pech = JSON.parse(pechstatus);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var t = new DiagramStove(0, 0, canvas.width, canvas.height);
+    t.BuildDefault();
+
+    for (var key in Pech) {
+        t._rProc[Pech[key].pech - 1].status = Pech[key].pstatus;
+        t._rBlink[Pech[key].pech - 1].status = Pech[key].bstatus;
+        t._rNumb[Pech[key].pech - 1].prostoy = Pech[key].prostoy;
+        t._rProc[Pech[key].pech - 1].percent = Pech[key].percent;
     }
     t.Print(ctx);
     if (chkText.checked) {

@@ -1,57 +1,65 @@
-﻿class BlinkStatus {
-    constructor(x, y, w, h) {
-        this._rAll = new Rectangle(x, y, w, h);
-        this._statusColor = [];
-        this._status = 0;
+﻿function BlinkStatus(x, y, w, h) {
+    this.Status = function (nVal) {
+        if (nVal == undefined) return status;
+        status = (isNaN(nVal) || parseInt(nVal) < 0) ? 0 :
+            parseInt(nVal) > statColor.length ? statColor.length : parseInt(nVal);
+    }
+    this.Rect = function (nVal) {
+        if (nVal == undefined) return rAll;
+        rAll.Rect(nVal);
+    }
+    this.RectParam = function (x, y, w, h) {
+        rAll.RectParam(x, y, w, h);
+    }
+    this.BuildDefault = function () {
+        var defaultColor = ["#00f", "#f00", "#0f0"];
+        for (var i = 0; i < defaultColor.length; i++)
+            self.AddStatus(defaultColor[i]);
     }
 
-    get allStats() {
-        return this._statusColor.length;
-    }
-    get status() {
-        return this._status;
-    }
-    get rect() {
-        return this._rAll;
-    }
-
-    set status(nVal) {
-        this._status = (isNaN(nVal) || parseInt(nVal) < 0) ? 0 :
-            parseInt(nVal) > this._statusColor.length ? this._statusColor.length :
-                parseInt(nVal);
-    }
-    set rect(nVal) {
-        this._rAll.Change(nVal);
-    }
-
-    AddStatus(color) {
+    this.AddStatus = function (color, index) {
         var c = (color.search(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i) != -1) ?
             color.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i)[0] : "#000000";
-        this._statusColor.push(c);
+        if (index == undefined || isNaN(parseInt(index)) ||
+            parseInt(index) - 1 < 0 || parseInt(index) - 1 > statColor.length)
+            statColor.push(c);
+        else
+            statColor.splice(parseInt(index) - 1, 0, c);
+        status = 0;
     }
-    DelStatus() {
-        if (this._statusColor.length > 0)
-            this._statusColor.pop();
-        this._status = 0;
+    this.ChangeStatus = function (color, index) {
+        var c = (color.search(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i) != -1) ?
+            color.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i)[0] : "#000000";
+        if (index != undefined && !isNaN(parseInt(index)) &&
+            parseInt(index) > 0 && parseInt(index) <= statColor.length)
+            statColor.splice(parseInt(index) - 1, 1, c);
     }
-
-    Change(x, y, w, h) {
-        this._rAll.ChangeParam(x, y, w, h);
+    this.DelStatus = function (index) {
+        if (statColor.length > 0){
+            if (index == undefined || isNaN(parseInt(index)) ||
+                parseInt(index) - 1 < 0 || parseInt(index) - 1 > statColor.length)
+                statColor.splice(parseInt(index) - 1, 1);
+            else
+                statColor.pop();
+            status = 0;
+        }
     }
-
-    Print(ctx) {
-        ctx.fillStyle = this._status > 0 ? this._statusColor[this._status - 1] : "#aaa";
-        ctx.fillRect(this._rAll.x, this._rAll.y, this._rAll.w, this._rAll.h);
+    this.Print = function (ctx) {
+        ctx.fillStyle = status > 0 ? statColor[status - 1] : "#ddd";
+        ctx.fillRect(rAll.X(), rAll.Y(), rAll.W(), rAll.H());
         ctx.strokeStyle = "#333";
-        ctx.strokeRect(this._rAll.x, this._rAll.y, this._rAll.w, this._rAll.h);
+        ctx.strokeRect(rAll.X(), rAll.Y(), rAll.W(), rAll.H());
+    }
+    this.PrintText = function (ctx) {
+        ctx.fillStyle = "#888";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.font = (rAll.H() - 2 < 0 ? 0 : rAll.H() - 2) + "px Arial";
+        ctx.fillText(status + "/" + statColor.length, rAll.X() + rAll.W() / 2, rAll.Y() + rAll.H() / 2 + 1);
     }
 
-    BuildDefault() {
-        var defaultColor = ["#00f", "#0f0", "#f00"];
-        for (var i = 0; i < defaultColor.length; i++)
-            this.AddStatus(defaultColor[i]);
-    };
-
-
+    var self = this;
+    var rAll = new Rectangle(x, y, w, h);
+    var statColor = [];
+    var status = 0;
 }
-
