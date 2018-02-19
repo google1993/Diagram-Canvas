@@ -7,6 +7,7 @@ var chkloop = document.getElementById('ChkLoop');
 
 var legend1 = document.getElementById("legend1");
 var legend2 = document.getElementById("legend2");
+var dateupdate = document.getElementById("DateUpdate");
 
 var but1 = document.getElementById('TestPercent'); 
 var but2 = document.getElementById('TestProcess'); 
@@ -162,6 +163,14 @@ but6.onclick = function () {
             diagramStove.ChangeStatNumb(i + 1, Pech[i].prostoy);
         }
         diagramStove.Print(ctx);
+        var b = new Date;
+        dateupdate.innerHTML =
+            b.getFullYear() + "." +
+            FNL(b.getMonth() + 1, 2) + "." +
+            FNL(b.getDate(), 2) + "  " +
+            FNL(b.getHours(), 2) + ":" +
+            FNL(b.getMinutes(), 2) + ":" +
+            FNL(b.getSeconds(), 2);
         if (chkText.checked) {
             diagramStove.PrintText(ctx);
         }
@@ -173,7 +182,9 @@ but6.onclick = function () {
         }
     }
 }
-
+function FNL(a, b) {
+    for (var d = "" + a; d.length < b;)d = "0" + d; return d
+}
 function getRColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
