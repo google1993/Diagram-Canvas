@@ -21,11 +21,17 @@
             rProc.push(Process);
             rBlink.push(Blink);
             rNumb.push(Numb);
+            pStart.push(new Date());
+            pEnd.push(new Date());
+            pFlag.push(0);
         }
         else {
             rProc.splice(parseInt(index) - 1, 0, Process);
             rBlink.splice(parseInt(index) - 1, 0, Blink);
             rNumb.splice(parseInt(index) - 1, 0, Numb);
+            pStart.splice(parseInt(index) - 1, 0, new Date());
+            pEnd.splice(parseInt(index) - 1, 0, new Date());
+            pFlag.splice(parseInt(index) - 1, 0, 0);
         }
         Rebuild();
     }
@@ -35,6 +41,9 @@
             rProc.splice(parseInt(index) - 1, 0, Process);
             rBlink.splice(parseInt(index) - 1, 0, Blink);
             rNumb.splice(parseInt(index) - 1, 0, Numb);
+            pStart.splice(parseInt(index) - 1, 0, new Date());
+            pEnd.splice(parseInt(index) - 1, 0, new Date());
+            pFlag.splice(parseInt(index) - 1, 0, 0);
         }
         Rebuild();
     }
@@ -45,11 +54,17 @@
                 rProc.splice(parseInt(index) - 1, 1);
                 rBlink.splice(parseInt(index) - 1, 1);
                 rNumb.splice(parseInt(index) - 1, 1);
+                pStart.splice(parseInt(index) - 1, 1);
+                pEnd.splice(parseInt(index) - 1, 1);
+                pFlag.splice(parseInt(index) - 1, 1);
             }
             else {
                 rProc.pop();
                 rBlink.pop();
                 rNumb.pop();
+                pStart.pop();
+                pEnd.pop();
+                pFlag.pop();
             }
         }
         Rebuild();
@@ -59,7 +74,8 @@
         if (index != undefined && !isNaN(parseInt(index)) &&
             parseInt(index) > 0 && parseInt(index) <= rProc.length) {
             rProc[parseInt(index) - 1].Status(status);
-            rProc[parseInt(index) - 1].Percent(percent);
+            if (percent != undefined)
+                rProc[parseInt(index) - 1].Percent(percent);
         }
     }
     this.ChangeStatBlink = function (index, status) {
@@ -72,6 +88,23 @@
             parseInt(index) > 0 && parseInt(index) <= rNumb.length)
             rNumb[parseInt(index) - 1].Prostoy(prostoy);
     }
+    this.ChangeControllPercent = function (index, b) {
+        if (index != undefined && !isNaN(parseInt(index)) &&
+            parseInt(index) > 0 && parseInt(index) <= pFlag.length)
+            pFlag[parseInt(index) - 1] = (isNaN(parseInt(b)) || parseInt(b) != 1) ? 0 : 1;
+    }
+    this.ChangeStartDate = function (index, dStart) {
+        if (index != undefined && !isNaN(parseInt(index)) &&
+            parseInt(index) > 0 && parseInt(index) <= pStart.length)
+            pStart[parseInt(index) - 1] = dStart;
+        CountPercent(1);
+    }
+    this.ChangeEndDate = function (index, dEnd) {
+        if (index != undefined && !isNaN(parseInt(index)) &&
+            parseInt(index) > 0 && parseInt(index) <= pEnd.length)
+            pEnd[parseInt(index) - 1] = dEnd;
+        CountPercent(1);
+    }
 
     this.BuildDefault = function () {
         while (rProc.length < 48) {
@@ -80,6 +113,9 @@
             rBlink.push(new BlinkStatus(0, 0, 0, 0));
             rBlink[rProc.length - 1].BuildDefault();
             rNumb.push(new NumberColumn(0, 0, 0, 0, rProc.length));
+            pStart.push(new Date());
+            pEnd.push(new Date());
+            pFlag.push(1);
         }
         Rebuild();
     };
@@ -122,12 +158,29 @@
             coorX += stepX + 3;
         }
     }
+    function CountPercent(b) {
+        for (var i = 0; i < rProc.length; i++){
+            if (pFlag[i] == 1) {
+                var full = pEnd[i] - pStart[i];
+                full = full == 0 ? 1 : full;
+                var now = new Date() - pStart[i];
+                var percent = Math.floor(now * 100 / full);
+                rProc[i].Percent(percent);
+                rNumb[i].Prostoy(percent > 100 ? 1 : 0);
+            }
+        }
+        if (b == undefined)
+            setTimeout(CountPercent, 1000);
+    }
 
     var self = this;
-
     var rProc = [];
     var rBlink = [];
     var rNumb = [];
+    var pStart = [];
+    var pEnd = [];
+    var pFlag = [];
     var rAll = new Rectangle(0, 0, 0, 0);
     self.RectParam(x, y, w, h);
+    setTimeout(CountPercent, 1000);
 }

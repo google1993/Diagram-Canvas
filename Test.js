@@ -157,13 +157,16 @@ but6.onclick = function () {
         }
         var Pech = JSON.parse(xhr.responseText);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (var i = 0; i < diagramStove.ProcessCount(); i++) {
-            diagramStove.ChangeStatProc(i + 1, Pech[i].pstatus, Pech[i].percent);
-            diagramStove.ChangeStatBlink(i + 1, Pech[i].bstatus);
-            diagramStove.ChangeStatNumb(i + 1, Pech[i].prostoy);
+        //var c = Pech[0].DateUpdate;
+        for (var i = 1; i <= diagramStove.ProcessCount(); i++) {
+            diagramStove.ChangeStatBlink(i, Pech[i].Bstatus);
+            diagramStove.ChangeStatProc(i, Pech[i].Pstatus);
+            diagramStove.ChangeStartDate(i, ConvDate(Pech[i].Start));
+            diagramStove.ChangeEndDate(i, ConvDate(Pech[i].EndTeor));
         }
-        diagramStove.Print(ctx);
-        var b = new Date;
+        //diagramStove.Print(ctx);
+
+        var b = ConvDate(Pech[0].DateNow);
         dateupdate.innerHTML =
             b.getFullYear() + "." +
             FNL(b.getMonth() + 1, 2) + "." +
@@ -171,19 +174,37 @@ but6.onclick = function () {
             FNL(b.getHours(), 2) + ":" +
             FNL(b.getMinutes(), 2) + ":" +
             FNL(b.getSeconds(), 2);
-        if (chkText.checked) {
-            diagramStove.PrintText(ctx);
-        }
+        //if (chkText.checked) {
+        //    diagramStove.PrintText(ctx);
+        //}
         if (chkloop.checked) {
             setTimeout(but6.onclick, 60000);
             but6.disabled = true;
         } else {
             but6.disabled = false;
         }
+        PrintCycle();
     }
 }
+
+function PrintCycle() {
+    diagramStove.Print(ctx);
+    if (chkText.checked) {
+        diagramStove.PrintText(ctx);
+    }
+    if (but6.disabled)
+        setTimeout(PrintCycle, 1000);
+}
+
 function FNL(a, b) {
     for (var d = "" + a; d.length < b;)d = "0" + d; return d
+}
+function ConvDate(a) {
+    a = a.split(".")[0].split("T");
+    var d = a[0].split("-");
+    var h = a[1].split(":");
+    var date = new Date(d[0], parseInt(d[1]) - 1, d[2], h[0], h[1], h[2]);
+    return  date;
 }
 function getRColor() {
     var letters = '0123456789ABCDEF';
@@ -193,4 +214,3 @@ function getRColor() {
     }
     return color;
 }
-
