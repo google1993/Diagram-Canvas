@@ -50,12 +50,19 @@
         ctx.strokeStyle = "#333";
         ctx.strokeRect(rAll.X(), rAll.Y(), rAll.W(), rAll.H());
     }
-    this.PrintText = function (ctx) {
+    this.PrintText = function (ctx, rotate) {
+        ctx.save();
+        ctx.translate(rAll.X() + rAll.W() / 2, rAll.Y() + rAll.H() / 2 + 1);
+        if (rotate != 0) {
+            ctx.translate(0, - 2);
+            ctx.rotate(Math.PI);
+        }
         ctx.fillStyle = "#888";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.font = (rAll.H() - 2 < 0 ? 0 : rAll.H() - 2) + "px Arial";
-        ctx.fillText(status + "/" + statColor.length, rAll.X() + rAll.W() / 2, rAll.Y() + rAll.H() / 2 + 1);
+        ctx.fillText(status + "/" + statColor.length, 0, 0);
+        ctx.restore();
     }
 
     var self = this;

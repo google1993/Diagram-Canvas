@@ -18,13 +18,27 @@ var but5 = document.getElementById('TestDiagramStove');
 var but6 = document.getElementById('TestPost');
 var text = document.getElementById('TestDiv');
 
+var diagramStove = new Diagram(0, 0, canvas.width, canvas.height);
+diagramStove.BuildDefault();
+
 function Resize() {
-    canvas.style.margin = "10px";
-    canvas.width = window.innerWidth - 20;
-    canvas.height = window.innerHeight - 70;
+
+    if (window.innerWidth > window.innerHeight) {
+        canvas.style.margin = "10px 0px 10px 10px";
+        canvas.width = window.innerWidth - 20;
+        canvas.height = window.innerHeight - legend1.offsetHeight - legend2.offsetHeight - buttons.offsetHeight - 60;
+        diagramStove.Rotate = 0;
+        diagramStove.RectParam(0, 0, canvas.width, canvas.height);
+    }
+    else {
+        canvas.style.margin = "10px 0px 27px 10px";
+        canvas.width = window.innerWidth - 37;
+        canvas.height = (window.innerHeight - 70) * Math.floor(diagramStove.ProcessCount() / 13);
+        diagramStove.Rotate = 1;
+        diagramStove.RectParam(0, 0, canvas.height, canvas.width);
+    }
     ctx = canvas.getContext("2d");
-    canvas.height = window.innerHeight - legend1.offsetHeight - legend2.offsetHeight - buttons.offsetHeight - 60;
-    diagramStove.RectParam(0, 0, canvas.width, canvas.height);
+
     diagramStove.Print(ctx);
     if (chkText.checked) {
         diagramStove.PrintText(ctx);
@@ -140,10 +154,6 @@ but5.onclick = function () {
         t.PrintText(ctx);
     }
 }
-
-
-var diagramStove = new Diagram(0, 0, canvas.width, canvas.height);
-diagramStove.BuildDefault();
 
 but6.onclick = function () {
     var xhr = new XMLHttpRequest();

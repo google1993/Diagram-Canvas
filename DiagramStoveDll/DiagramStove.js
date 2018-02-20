@@ -1,6 +1,7 @@
 ﻿function Diagram(x, y, w, h) {
     this.minBoardW = function () { return rProc.length * 8 + 5; }
     this.minBoardH = function () { return 141; }
+    this.Rotate = 0;
 
     this.Rect = function (nVal) {
         if (nVal == undefined) return rAll;
@@ -121,22 +122,34 @@
     };
 
     this.Print = function (ctx) {
+        ctx.save();
+        if (self.Rotate != 0) {
+            ctx.translate(rAll.H(), 0);
+            ctx.rotate(- 3 * Math.PI / 2);
+        }
         ctx.clearRect(rAll.X() - 1, rAll.Y() - 1, rAll.W() + 2, rAll.H() + 2);
         ctx.fillStyle = "#ddd";
         ctx.fillRect(rAll.X(), rAll.Y(), rAll.W(), rAll.H());
         for (var i = 0; i < rProc.length; i++) {
             rProc[i].Print(ctx);
             rBlink[i].Print(ctx);
-            rNumb[i].Print(ctx);
+            rNumb[i].Print(ctx, self.Rotate);
         }
         ctx.strokeStyle = "#333";
         ctx.strokeRect(rAll.X(), rAll.Y(), rAll.W(), rAll.H());
+        ctx.restore();
     }
     this.PrintText = function (ctx) {
+        ctx.save();
+        if (self.Rotate != 0) {
+            ctx.translate(rAll.H(), 0);
+            ctx.rotate(- 3 * Math.PI / 2);
+        }
         for (var i = 0; i < rProc.length; i++) {
             rProc[i].PrintText(ctx);
-            rBlink[i].PrintText(ctx);
+            rBlink[i].PrintText(ctx, self.Rotate);
         }
+        ctx.restore();
     }
 
     function Rebuild() {

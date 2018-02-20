@@ -14,7 +14,7 @@
     this.RectParam = function (x, y, w, h) {
         rAll.RectParam(x, y, w, h);
     }
-    this.Print = function (ctx) {
+    this.Print = function (ctx, rotate) {
         ctx.fillStyle = prostoy == 0 ? "#ff0" : "#ff8000";
         ctx.fillRect(rAll.X(), rAll.Y(), rAll.W(), rAll.H());
         ctx.strokeStyle = "#333";
@@ -23,9 +23,16 @@
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         var px = rAll.H() < rAll.W() ? rAll.H() - 3 : rAll.W() - 3;
+        ctx.save();
+        ctx.translate(rAll.X() + rAll.W() / 2, rAll.Y() + 1 + rAll.H() / 2);
+        if (rotate != 0) {
+            ctx.translate(+1,0);
+            ctx.rotate(3 * Math.PI / 2);
+        }
         px = px < 0 ? 0 : px;
         ctx.font = px + "px Arial";
-        ctx.fillText(number, rAll.X() + rAll.W() / 2, rAll.Y() + 1 + rAll.H() / 2);
+        ctx.fillText(number, 0, 0);
+        ctx.restore();
     }
 
     var self = this;
