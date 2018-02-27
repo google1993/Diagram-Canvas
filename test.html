@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Diagram Stoves</title>
+    <!--[if lt IE 9]>
+            <script src="Scripts/html5shiv.min.js"></script>        
+    <![endif]-->
+</head>
+<body style="margin:0px; padding:0px">
+    <canvas id="canvas" style="margin:0px; padding:0px"></canvas>
+
+    <div id="legend1">
+        <div style="display:inline-block; margin:0px 5px 0px 20px; background-color: #0ff ; padding:19px 19px 0px 0px;"></div> Выгрузка-загрузка,
+        <div style="display:inline-block; margin:0px 5px 0px 0px; background-color: #00f ; padding:19px 19px 0px 0px;"></div> Вакуумирование,
+        <div style="display:inline-block; margin:0px 5px 0px 0px; background-color: #f00 ; padding:19px 19px 0px 0px;"></div> Токовая операция,
+        <div style="display:inline-block; margin:0px 5px 0px 0px; background-color: #0f0 ; padding:19px 19px 0px 0px;"></div> Охлаждение,
+        <div style="display:inline-block; margin:0px 5px 0px 0px; background-color: #8500b6 ; padding:19px 19px 0px 0px;"></div> Разведение,
+        <div style="display:inline-block; margin:0px 5px 0px 0px; background-color: #f0f ; padding:19px 19px 0px 0px;"></div> ВУР
+    </div>
+    <div id="legend2">
+        <div style="display:inline-block; height:9px; margin:10px 5px 0px 20px; background-color: #00f ; padding:0px 19px 0px 0px;"></div> Приварка,
+        <div style="display:inline-block; height:9px; margin:10px 5px 0px 0px; background-color: #0f0 ; padding:0px 19px 0px 0px;"></div> Плавка,
+        <div style="display:inline-block; height:9px; margin:10px 5px 0px 0px; background-color: #f00 ; padding:0px 19px 0px 0px;"></div> Оплав
+    </div>
+    <div id="buttons" style="display:inline;">
+        <input id="PText" type="checkbox" style=" margin:10px 0px 10px 10px;"> Text
+        <input id="DefData" type="checkbox" style=" margin:10px 0px 10px 10px;"> Default Data
+
+        <input id="TestPercent" type="button" value="Test Percent" style=" margin:10px;" />
+        <input id="TestProcess" type="button" value="Test Process" style=" margin:10px;" />
+        <input id="TestBlinkStatus" type="button" value="Test Blink" style=" margin:10px;" />
+        <input id="TestNumberColumn" type="button" value="Test Number" style=" margin:10px;" />
+        <input id="TestDiagramStove" type="button" value="Test Diagram" style=" margin:10px;" />
+        <input id="TestPost" type="button" value="Test Post" style=" margin:10px;" />
+        <input id="ChkLoop" type="checkbox" style=" margin:10px 0px 10px 10px;"> Loop
+        <div id="DateUpdate" style=" margin:10px 0px 10px 10px; display:inline;"></div>
+    </div>
+
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="DiagramStoveDll/Rectangle.js"></script>
+    <script src="DiagramStoveDll/PercentColumn.js"></script>
+    <script src="DiagramStoveDll/ProcessColumn.js"></script>
+    <script src="DiagramStoveDll/BlinkStatus.js"></script>
+    <script src="DiagramStoveDll/NumberColumn.js"></script>
+    <script src="DiagramStoveDll/DiagramStove.js"></script>
+	<!--<script src="diagram.min.js"></script>-->
+    <script src="test.js"></script>
+	<!--<script src="test.min.js"></script>-->
+</body>
+</html>
