@@ -66,6 +66,8 @@ function UpdateStatus() {
             $("#Update_Button").show();
             return;
         }
+        else 
+            $("#Error_Border").hide();
         var Pech = JSON.parse(xhr.responseText);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (var i = 1; i <= diagramStove.ProcessCount(); i++) {
@@ -82,9 +84,15 @@ function UpdateStatus() {
             FNL(b.getHours(), 2) + ":" +
             FNL(b.getMinutes(), 2) + ":" +
             FNL(b.getSeconds(), 2);
+        if (Math.abs(b - new Date()) > 60000) {
+            document.getElementById("Error_Message").innerHTML = "Разница между системным и серверным временем " + Math.floor(Math.abs(b - new Date()) / 1000) + " сек";
+            $("#Error_Border").show();
+            $("#Update_Button").hide();
+        }
+        else
+            $("#Error_Border").hide();
         setTimeout(UpdateStatus, 60000);
-        PrintCycle();
-        $("#Error_Border").hide();
+        diagramStove.Print(ctx);
     }
 }
 UpdateStatus();

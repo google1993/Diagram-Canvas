@@ -1,0 +1,342 @@
+﻿[
+  {
+    "DateNow": "2018-02-27T15:07:09.7398739+05:00",
+    "DateUpdate": "2018-02-27T15:06:12"
+  },
+  {
+    "Pech": 1,
+    "Pstatus": 10,
+    "Bstatus": 3,
+    "Start": "2018-02-27T12:28:00",
+    "EndTeor": "2018-02-27T16:43:27"
+  },
+  {
+    "Pech": 2,
+    "Pstatus": 8,
+    "Bstatus": 3,
+    "Start": "2018-02-27T12:55:00",
+    "EndTeor": "2018-02-27T15:45:32"
+  },
+  {
+    "Pech": 3,
+    "Pstatus": 4,
+    "Bstatus": 2,
+    "Start": "2018-02-27T14:49:00",
+    "EndTeor": "2018-02-27T15:29:59"
+  },
+  {
+    "Pech": 4,
+    "Pstatus": 5,
+    "Bstatus": 1,
+    "Start": "2018-02-27T14:29:00",
+    "EndTeor": "2018-02-27T14:59:40"
+  },
+  {
+    "Pech": 5,
+    "Pstatus": 2,
+    "Bstatus": 1,
+    "Start": "2018-02-27T13:35:00",
+    "EndTeor": "2018-02-27T15:35:07"
+  },
+  {
+    "Pech": 6,
+    "Pstatus": 8,
+    "Bstatus": 3,
+    "Start": "2018-02-27T11:27:00",
+    "EndTeor": "2018-02-27T16:07:14"
+  },
+  {
+    "Pech": 7,
+    "Pstatus": 2,
+    "Bstatus": 1,
+    "Start": "2018-02-27T12:48:00",
+    "EndTeor": "2018-02-27T14:48:13"
+  },
+  {
+    "Pech": 8,
+    "Pstatus": 1,
+    "Bstatus": 0,
+    "Start": "2018-02-27T14:33:00",
+    "EndTeor": "2018-02-27T15:29:17"
+  },
+  {
+    "Pech": 9,
+    "Pstatus": 2,
+    "Bstatus": 1,
+    "Start": "2018-02-27T14:17:00",
+    "EndTeor": "2018-02-27T16:16:40"
+  },
+  {
+    "Pech": 10,
+    "Pstatus": 8,
+    "Bstatus": 3,
+    "Start": "2018-02-27T12:33:00",
+    "EndTeor": "2018-02-27T16:35:36"
+  },
+  {
+    "Pech": 11,
+    "Pstatus": 2,
+    "Bstatus": 1,
+    "Start": "2018-02-27T14:34:00",
+    "EndTeor": "2018-02-27T16:34:32"
+  },
+  {
+    "Pech": 12,
+    "Pstatus": 8,
+    "Bstatus": 3,
+    "Start": "2018-02-27T13:25:00",
+    "EndTeor": "2018-02-27T18:19:17"
+  },
+  {
+    "Pech": 13,
+    "Pstatus": 8,
+    "Bstatus": 3,
+    "Start": "2018-02-27T10:13:00",
+    "EndTeor": "2018-02-27T15:34:17"
+  },
+  {
+    "Pech": 14,
+    "Pstatus": 1,
+    "Bstatus": 0,
+    "Start": "2018-02-27T08:32:00",
+    "EndTeor": "2018-02-27T09:28:09"
+  },
+  {
+    "Pech": 15,
+    "Pstatus": 1,
+    "Bstatus": 0,
+    "Start": "2018-01-05T13:32:00",
+    "EndTeor": "2018-01-05T14:29:52"
+  },
+  {
+    "Pech": 16,
+    "Pstatus": 1,
+    "Bstatus": 0,
+    "Start": "2018-01-05T13:32:00",
+    "EndTeor": "2018-01-05T14:29:52"
+  },
+  {
+    "Pech": 17,
+    "Pstatus": 4,
+    "Bstatus": 2,
+    "Start": "2018-02-27T15:03:00",
+    "EndTeor": "2018-02-27T15:42:52"
+  },
+  {
+    "Pech": 18,
+    "Pstatus": 3,
+    "Bstatus": 2,
+    "Start": "2018-02-27T14:55:00",
+    "EndTeor": "2018-02-27T15:10:17"
+  },
+  {
+    "Pech": 19,
+    "Pstatus": 3,
+    "Bstatus": 1,
+    "Start": "2018-02-27T14:59:00",
+    "EndTeor": "2018-02-27T15:24:32"
+  },
+  {
+    "Pech": 20,
+    "Pstatus": 10,
+    "Bstatus": 3,
+    "Start": "2018-02-27T12:01:00",
+    "EndTeor": "2018-02-27T16:16:24"
+  },
+  {
+    "Pech": 21,
+    "Pstatus": 1,
+    "Bstatus": 0,
+    "Start": "2018-02-27T05:24:00",
+    "EndTeor": "2018-02-27T06:20:44"
+  },
+  {
+    "Pech": 22,
+    "Pstatus": 9,
+    "Bstatus": 3,
+    "Start": "2018-02-27T14:53:00",
+    "EndTeor": "2018-02-27T18:03:10"
+  },
+  {
+    "Pech": 23,
+    "Pstatus": 6,
+    "Bstatus": 3,
+    "Start": "2018-02-27T14:54:00",
+    "EndTeor": "2018-02-27T15:44:14"
+  },
+  {
+    "Pech": 24,
+    "Pstatus": 10,
+    "Bstatus": 3,
+    "Start": "2018-02-25T17:52:00",
+    "EndTeor": "2018-02-25T22:37:24"
+  },
+  {
+    "Pech": 25,
+    "Pstatus": 8,
+    "Bstatus": 3,
+    "Start": "2018-02-27T13:49:00",
+    "EndTeor": "2018-02-27T17:33:17"
+  },
+  {
+    "Pech": 26,
+    "Pstatus": 1,
+    "Bstatus": 0,
+    "Start": "2018-02-27T12:58:00",
+    "EndTeor": "2018-02-27T13:54:06"
+  },
+  {
+    "Pech": 27,
+    "Pstatus": 1,
+    "Bstatus": 0,
+    "Start": "2018-02-27T13:12:00",
+    "EndTeor": "2018-02-27T14:07:28"
+  },
+  {
+    "Pech": 28,
+    "Pstatus": 2,
+    "Bstatus": 1,
+    "Start": "2018-02-27T14:19:00",
+    "EndTeor": "2018-02-27T16:19:01"
+  },
+  {
+    "Pech": 29,
+    "Pstatus": 1,
+    "Bstatus": 0,
+    "Start": "2018-02-27T12:42:00",
+    "EndTeor": "2018-02-27T13:37:30"
+  },
+  {
+    "Pech": 30,
+    "Pstatus": 10,
+    "Bstatus": 3,
+    "Start": "2018-02-27T14:39:00",
+    "EndTeor": "2018-02-27T17:39:26"
+  },
+  {
+    "Pech": 31,
+    "Pstatus": 6,
+    "Bstatus": 3,
+    "Start": "2018-02-27T15:01:00",
+    "EndTeor": "2018-02-27T15:50:36"
+  },
+  {
+    "Pech": 32,
+    "Pstatus": 2,
+    "Bstatus": 1,
+    "Start": "2018-02-27T14:48:00",
+    "EndTeor": "2018-02-27T16:47:51"
+  },
+  {
+    "Pech": 33,
+    "Pstatus": 5,
+    "Bstatus": 1,
+    "Start": "2018-02-27T14:07:00",
+    "EndTeor": "2018-02-27T14:37:00"
+  },
+  {
+    "Pech": 34,
+    "Pstatus": 2,
+    "Bstatus": 1,
+    "Start": "2018-02-27T14:32:00",
+    "EndTeor": "2018-02-27T16:32:05"
+  },
+  {
+    "Pech": 35,
+    "Pstatus": 8,
+    "Bstatus": 3,
+    "Start": "2018-02-27T11:31:00",
+    "EndTeor": "2018-02-27T17:38:10"
+  },
+  {
+    "Pech": 36,
+    "Pstatus": 5,
+    "Bstatus": 1,
+    "Start": "2018-02-27T14:43:00",
+    "EndTeor": "2018-02-27T15:13:03"
+  },
+  {
+    "Pech": 37,
+    "Pstatus": 8,
+    "Bstatus": 3,
+    "Start": "2018-02-27T13:28:00",
+    "EndTeor": "2018-02-27T17:14:36"
+  },
+  {
+    "Pech": 38,
+    "Pstatus": 1,
+    "Bstatus": 0,
+    "Start": "2018-02-27T10:44:00",
+    "EndTeor": "2018-02-27T11:39:42"
+  },
+  {
+    "Pech": 39,
+    "Pstatus": 1,
+    "Bstatus": 0,
+    "Start": "2018-02-12T22:12:00",
+    "EndTeor": "2018-02-12T23:07:38"
+  },
+  {
+    "Pech": 40,
+    "Pstatus": 10,
+    "Bstatus": 3,
+    "Start": "2018-02-27T14:40:00",
+    "EndTeor": "2018-02-27T18:55:36"
+  },
+  {
+    "Pech": 41,
+    "Pstatus": 10,
+    "Bstatus": 3,
+    "Start": "2018-02-27T10:58:00",
+    "EndTeor": "2018-02-27T15:12:52"
+  },
+  {
+    "Pech": 42,
+    "Pstatus": 4,
+    "Bstatus": 2,
+    "Start": "2018-02-27T14:44:00",
+    "EndTeor": "2018-02-27T15:24:32"
+  },
+  {
+    "Pech": 43,
+    "Pstatus": 1,
+    "Bstatus": 0,
+    "Start": "2018-02-27T13:59:00",
+    "EndTeor": "2018-02-27T14:54:25"
+  },
+  {
+    "Pech": 44,
+    "Pstatus": 1,
+    "Bstatus": 0,
+    "Start": "2018-02-27T14:26:00",
+    "EndTeor": "2018-02-27T15:22:28"
+  },
+  {
+    "Pech": 45,
+    "Pstatus": 3,
+    "Bstatus": 2,
+    "Start": "2018-02-27T14:55:00",
+    "EndTeor": "2018-02-27T15:10:17"
+  },
+  {
+    "Pech": 46,
+    "Pstatus": 4,
+    "Bstatus": 2,
+    "Start": "2018-02-27T14:55:00",
+    "EndTeor": "2018-02-27T15:35:17"
+  },
+  {
+    "Pech": 47,
+    "Pstatus": 10,
+    "Bstatus": 3,
+    "Start": "2018-02-27T13:23:00",
+    "EndTeor": "2018-02-27T17:38:09"
+  },
+  {
+    "Pech": 48,
+    "Pstatus": 9,
+    "Bstatus": 3,
+    "Start": "2018-02-27T12:47:00",
+    "EndTeor": "2018-02-27T15:56:53"
+  }
+]
